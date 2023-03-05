@@ -1,0 +1,22 @@
+.footer-container {
+  background-color: $PRIMARY-COLOR;
+  color: $WHITE-COLOR;
+  text-align: center;
+
+  &-icons {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+    margin-bottom: 1rem;
+
+    i {
+      font-size: 19px;
+    }
+  }
+
+  p {
+    font-weight: 300;
+    padding: 0.6rem;
+  }
+}

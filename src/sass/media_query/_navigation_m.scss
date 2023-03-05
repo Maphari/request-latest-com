@@ -1,0 +1,46 @@
+@media screen and (min-width: 50.063rem) {
+  .navigation-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    .div {
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+      align-items: center;
+      max-width: 105rem;
+      width: 100%;
+    }
+  }
+}
+
+@media screen and (max-width: 56.25rem) {
+  .navigation-container {
+    padding: 2rem 3rem;
+  }
+}
+
+@media screen and (max-width: 50.063rem) {
+  .navigation-container {
+    &__links {
+      display: none;
+    }
+  }
+}
+@media screen and (min-width: 50.063rem) {
+  .navigation-container {
+    .menu-open,
+    .menu-close {
+      display: none;
+    }
+  }
+  .menu-small {
+    display: none;
+  }
+}
+
+@media screen and (max-width: 28.75rem) {
+  .navigation-container {
+    padding: 2rem 1.5rem;
+  }
+}
