@@ -13,7 +13,6 @@ const HomePage = () => {
   return (
     <>
       <Navigation />
-      <Showcase />
       <Different />
       <HowitWorks />
       <Mobile />

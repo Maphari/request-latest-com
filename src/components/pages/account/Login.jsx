@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { auth, googleAuthProvider } from "../../../firebase/firebase-config";
-import { signInWithEmailAndPassword, signInWithPopup } from "firebase/auth";
+import { auth } from "../../../firebase/firebase-config";
+import { signInWithEmailAndPassword } from "firebase/auth";
 
 export default function Login() {
   const [email, setEmail] = useState("");
@@ -30,21 +30,10 @@ export default function Login() {
     }
   };
 
-  const signInWithGoogle = async () => {
-    try {
-      await signInWithPopup(auth, googleAuthProvider);
-      localStorage.setItem("isAuth", true);
-      navigate("/home");
-    } catch (error) {
-      setErr(error.message);
-    }
-  };
-
   const handleEmailErr = () => {
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     if (!email) {
       setEmailErr("Email is required");
-    } else if (!emailRegex.test(email)) {
+    } else if (!email.includes("@")) {
       setEmailErr("Please provide a valid email address");
     } else {
       setEmailErr("");
@@ -55,7 +44,7 @@ export default function Login() {
     const passwordRegex = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])[0-9a-zA-Z]{8,}$/;
     if (!password) {
       setPasswordErr("Password is required");
-    } else if (!passwordRegex.test(password)) {
+    } else if (!password.includes(passwordRegex)) {
       setPasswordErr("at least 8 charactes that contains letters and symbols");
     } else if (password.length < 8) {
       setPasswordErr("more than 8 characters required");
@@ -65,13 +54,6 @@ export default function Login() {
   };
   const prevent = (e) => {
     e.preventDefault();
-  };
-
-  const divEmailErr = {
-    border: `1px solid ${emailErr && "red"}`,
-  };
-  const divPasswordErr = {
-    border: `1px solid ${passwordErr ? "red" : null}`,
   };
 
   return (
@@ -85,13 +67,9 @@ export default function Login() {
             </p>
 
             <form onSubmit={prevent}>
-              {err && err}
+              <p className="text-[red] err mb-[0.75rem]">{err && err}</p>
               <div className="input-group mb-1">
-                <span
-                  className="input-group-text rounded-md"
-                  id="basic-addon1"
-                  style={divEmailErr}
-                >
+                <span className="input-group-text rounded-md" id="basic-addon1">
                   <i className="fa-solid fa-envelope"></i>
                 </span>
                 <input
@@ -102,18 +80,14 @@ export default function Login() {
                   aria-describedby="basic-addon1"
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
-                  style={divEmailErr}
+                  required
                 />
               </div>
               <p className="text-[red] err mb-[0.75rem]">
                 {emailErr && emailErr}
               </p>
               <div className="input-group mb-1">
-                <span
-                  className="input-group-text"
-                  id="basic-addon1"
-                  style={divPasswordErr}
-                >
+                <span className="input-group-text" id="basic-addon1">
                   <i className="fa-solid fa-lock"></i>
                 </span>
                 <input
@@ -124,7 +98,7 @@ export default function Login() {
                   aria-describedby="basic-addon1"
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
-                  style={divPasswordErr}
+                  required
                 />
               </div>
               <p className="text-[red] err mb-[0.75rem]">
@@ -141,9 +115,6 @@ export default function Login() {
               >
                 Log in
               </button>
-              <div className="google rounded-lg" onClick={signInWithGoogle}>
-                <i className="fa-brands fa-google"></i> Log in with google
-              </div>
               <div className="container-btn">
                 <p className="para">Don't have an account?</p>
                 <button className="btn-log" onClick={handleRegister}>

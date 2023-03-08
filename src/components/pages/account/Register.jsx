@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { useNavigate, redirect } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import {
   auth,
   googleAuthProvider,
@@ -8,7 +8,6 @@ import {
 import { createUserWithEmailAndPassword, signInWithPopup } from "firebase/auth";
 
 export default function Register() {
-  const [grantAccess, setGrantAccess] = useState(null);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [err, setErr] = useState("");
@@ -23,7 +22,7 @@ export default function Register() {
 
   const handleUserRegister = async () => {
     try {
-      if (!password || !email) {
+      if (!email && !password) {
         handleEmailErr();
         handlePasswordErr();
       } else {
@@ -32,31 +31,26 @@ export default function Register() {
           email,
           password
         );
-        const token = await user.getIdToken();
-        localStorage.setItem("token", token);
-        setGrantAccess(true);
+        user.uid && navigate("/home", { replace: true });
       }
     } catch (error) {
-      setErr(error);
+      setErr(error.message);
     }
   };
   const handleUserRegisterWithGoogle = async () => {
     try {
-      await signInWithPopup(auth, googleAuthProvider);
-      setGrantAccess(true);
+      const { user } = await signInWithPopup(auth, googleAuthProvider);
+      user.uid && navigate("/home", { replace: true });
     } catch (error) {
-      setErr(error);
+      setErr(error.message);
     }
   };
 
-  if (grantAccess) {
-    return navigate("/home");
-  }
-
   const handleEmailErr = () => {
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     if (!email) {
       setEmailErr("Email is required");
-    } else if (!validateEmail(email)) {
+    } else if (!email.includes(emailRegex)) {
       setEmailErr("Please provide a valid email address");
     } else {
       setEmailErr("");
@@ -64,9 +58,10 @@ export default function Register() {
   };
 
   const handlePasswordErr = () => {
+    const passwordRegex = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])[0-9a-zA-Z]{8,}$/;
     if (!password) {
       setPasswordErr("Password is required");
-    } else if (!validatePassword(password)) {
+    } else if (!password.includes(passwordRegex)) {
       setPasswordErr("at least 8 charactes that contains letters and symbols");
     } else if (password.length < 8) {
       setPasswordErr("more than 8 characters required");
@@ -75,19 +70,8 @@ export default function Register() {
     }
   };
 
-  const validatePassword = (password) => {
-    const passwordRegex = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])[0-9a-zA-Z]{8,}$/;
-    return passwordRegex.test(password);
-  };
-
-  const validateEmail = (email) => {
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    return emailRegex.test(email);
-  };
-
   const prevent = (e) => {
     e.preventDefault();
-    handleUserRegister();
   };
 
   return (
@@ -99,8 +83,9 @@ export default function Register() {
             <p className="register-container__inner-para">
               Create an account and access all amazing features
             </p>
-            {err && err}
+
             <form onSubmit={prevent}>
+              <p className="text-[red] err mb-[0.75rem]">{err && err}</p>
               <div className="input-group mb-1">
                 <span className="input-group-text rounded-md" id="basic-addon1">
                   <i className="fa-solid fa-envelope"></i>
@@ -146,7 +131,11 @@ export default function Register() {
                 <span className="color">terms</span> and{" "}
                 <span className="color">conditions</span>
               </p>
-              <button className="btn-sub rounded-lg" type="submit">
+              <button
+                className="btn-sub rounded-lg"
+                type="submit"
+                onClick={handleUserRegister}
+              >
                 Create account
               </button>
               <div

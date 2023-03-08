@@ -1,16 +1,17 @@
-import React, { useContext } from "react";
+import React from "react";
 import { useNavigate } from "react-router-dom";
 import { AuthContext } from "../contex/authContext";
 
 const Dashboard = () => {
+  const { grantAccess } = React.useContext(AuthContext);
   const navigate = useNavigate();
-  const { grantAccess } = useContext(AuthContext);
+
   if (!grantAccess) {
     return navigate("/login");
   } else {
     return (
       <>
-        <h1>Welcome {grantAccess.email}</h1>
+        <h1>welcome {grantAccess.email}</h1>
       </>
     );
   }

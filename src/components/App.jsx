@@ -1,5 +1,5 @@
-import React, { useContext } from "react";
-import { Route, Routes } from "react-router-dom";
+import React from "react";
+import { Route, Routes, redirect } from "react-router-dom";
 import { AuthContext } from "./contex/authContext";
 
 // PAGES
@@ -11,17 +11,22 @@ import Login from "./pages/account/Login";
 import Dashboard from "./pages/Dashborad";
 
 function App() {
-  const { grantAccess } = useContext(AuthContext);
+  const { grantAccess } = React.useContext(AuthContext);
   return (
     <>
-      <Routes>
-        <Route path="/" element={<HomePage />} />
-        <Route path="/home" element={<Dashboard />} />
-        <Route path="/about" element={<AboutUs />} />
-        <Route path="/contact" element={<ContactUs />} />
-        <Route path="/register" element={<Register />} />
-        <Route path="/login" element={<Login />} />
-      </Routes>
+      {!grantAccess ? (
+        <Routes>
+          <Route path="/" element={<HomePage />} />
+          <Route path="/about" element={<AboutUs />} />
+          <Route path="/contact" element={<ContactUs />} />
+          <Route path="/register" element={<Register />} />
+          <Route path="/login" element={<Login />} />
+        </Routes>
+      ) : (
+        <Routes>
+          <Route path="/home" element={<Dashboard />} />
+        </Routes>
+      )}
     </>
   );
 }

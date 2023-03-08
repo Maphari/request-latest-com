@@ -1,5 +1,5 @@
 .showcase-container {
-  background-color: $PRIMARY-COLOR;
+  background-image: $BACKGROUND-IMAGE-PRIMARY;
   color: $WHITE-COLOR;
   text-align: center;
   padding: 0 0 1rem;
@@ -36,12 +36,13 @@
         padding: 0.8rem;
         font-weight: 200;
         background-color: $PRIMARY-COLOR;
-        border-radius: 60px;
       }
       .btn {
         border: 1px solid $SECONDARY-COLOR;
         padding: 0.8rem;
         border-radius: 0;
+        color: $WHITE-COLOR;
+        background-color: $PRIMARY-COLOR;
         &:hover {
           background-color: $SECONDARY-COLOR;
           cursor: pointer;
