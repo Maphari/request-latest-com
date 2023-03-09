@@ -16,14 +16,17 @@ export default function Login() {
   };
 
   const signInWithEmailPassword = async () => {
-    const userToken = localStorage.getItem("token");
     try {
       if (!email || !password) {
         handleEmailErr();
         handlePasswordErr();
-      } else if (userToken) {
-        await signInWithEmailAndPassword(auth, email, password);
-        localStorage.setItem("isAuth", true);
+      } else {
+        const { user } = await signInWithEmailAndPassword(
+          auth,
+          email,
+          password
+        );
+        user.uid && navigate("/");
       }
     } catch (error) {
       setErr(error.message);

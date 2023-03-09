@@ -1,0 +1,62 @@
+.browse-container {
+  padding: 1rem 3rem;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  &__header {
+    font-size: 2rem;
+    font-weight: 500;
+  }
+  &__toggle-option {
+    background-image: $BACKGROUND-IMAGE-PRIMARY;
+    padding: 0.4rem 0.6rem;
+    border-radius: 50px;
+    color: $WHITE-COLOR;
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+
+    .link {
+      padding: 0.4rem 0.8rem;
+    }
+  }
+  &__toggle-location {
+    background-image: $BACKGROUND-IMAGE-PRIMARY;
+    color: $WHITE-COLOR;
+    padding: 0.8rem 1.4rem;
+    border-radius: 50px;
+  }
+  .form-container {
+    background-image: $BACKGROUND-IMAGE-PRIMARY;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-grow: 1;
+    gap: 1rem;
+    border-radius: 50px;
+    input {
+      outline: none;
+      padding: 0.9rem 0;
+      background-image: $BACKGROUND-IMAGE-PRIMARY;
+      width: 30rem;
+      color: $WHITE-COLOR;
+      border-radius: 50px;
+      font-weight: 300;
+    }
+  }
+  &__toggle-cart{
+    background-image: $BACKGROUND-IMAGE-PRIMARY;
+    color: $WHITE-COLOR;
+    padding: 0.8rem 1.4rem;
+    border-radius: 50px;
+  }
+}
+
+.active-choice {
+  background-color: white;
+  padding: 0.6rem 1.2rem;
+  border-radius: 50px;
+  color: $PRIMARY-COLOR;
+}

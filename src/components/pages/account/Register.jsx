@@ -31,7 +31,7 @@ export default function Register() {
           email,
           password
         );
-        user.uid && navigate("/home", { replace: true });
+        user.uid && navigate("/", { replace: true });
       }
     } catch (error) {
       setErr(error.message);
@@ -40,7 +40,7 @@ export default function Register() {
   const handleUserRegisterWithGoogle = async () => {
     try {
       const { user } = await signInWithPopup(auth, googleAuthProvider);
-      user.uid && navigate("/home", { replace: true });
+      user.uid && navigate("/", { replace: true });
     } catch (error) {
       setErr(error.message);
     }

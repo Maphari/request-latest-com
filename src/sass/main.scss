@@ -12,6 +12,7 @@
 @import "./components/newsletter";
 @import "./components/fotter";
 @import "./components/register";
+@import "./components/category";
 // MEDIA-QUERY
 @import "./media_query/navigation_m";
 @import "./media_query/showcase_m";
@@ -21,3 +22,7 @@
 @import "./media_query/newsletter_m";
 @import "./media_query/fotter_m";
 @import "./media_query/register_m";
+@import "./media_query/dashboard_m";
+// PAGES
+@import "./pages/dashboard";
+@import "./pages/browse";
