@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
+import { ScrollReveal } from "reveal-on-scroll-react";
 // IMAGES IMPORTS
 import logo from "../assets/logo.png";
 // COMPONENTS IMPORTS

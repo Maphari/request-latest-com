@@ -1,7 +1,32 @@
 import React from "react";
+import TopCategory from "./TopCategory";
 
 export default function Browse() {
   const [searchTerm, setSearchTerm] = React.useState("");
+  const [location, setLocation] = React.useState([]);
+  const [locationErr, setLocationErr] = React.useState("");
+
+  React.useEffect(() => {
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition((position) => {
+        const { latitude, longitude } = position.coords;
+        const apiUrl = `https://nominatim.openstreetmap.org/reverse?format=jsonv2&lat=${latitude}&lon=${longitude}`;
+        try {
+          fetch(apiUrl)
+            .then((response) => response.json())
+            .then((data) => {
+              const address = data.display_name;
+              setLocation(address);
+            });
+        } catch (error) {
+          setLocationErr(error.message);
+        }
+      });
+    } else {
+      setLocationErr("Geolocation is not supported by this browser.");
+    }
+  }, []);
+
   return (
     <>
       <div className="browse-container">
@@ -10,7 +35,13 @@ export default function Browse() {
           <form>
             <div className="browse-container__subnav__location">
               <i className="fa-solid fa-location-dot"></i>
-              <p>Location</p>
+              <p>
+                {locationErr
+                  ? locationErr
+                  : location.length > 10
+                  ? location.slice(0, 33)
+                  : location}
+              </p>
             </div>
             <div className="form">
               <i className="fa-solid fa-magnifying-glass"></i>
@@ -20,43 +51,14 @@ export default function Browse() {
                 onChange={(event) => setSearchTerm(event.target.value)}
                 value={searchTerm}
               />
+              {searchTerm && (
+                <div className="search-box drop-shadow-2xl">{searchTerm}</div>
+              )}
             </div>
           </form>
         </div>
 
-        <div className="browse-container__category-container">
-          <h1 className="browse-container__category-container-header">
-            Explore by category
-          </h1>
-          <div className="browse-container__category-container-cat">
-            <div className="browse-container__category-container-cat-one hover:drop-shadow-2xl">
-              <h1>Grocery</h1>
-              <i className="fa-solid fa-basket-shopping"></i>
-            </div>
-            <div className="browse-container__category-container-cat-one hover:drop-shadow-2xl">
-              <h1>Laundry</h1>
-              <i className="fa-solid fa-hands-bubbles"></i>
-            </div>
-            <div className="browse-container__category-container-cat-one hover:drop-shadow-2xl">
-              <h1>Photography</h1>
-              <i className="fa-solid fa-camera"></i>
-            </div>
-            <div className="browse-container__category-container-cat-one hover:drop-shadow-2xl">
-              <h1>Gamers</h1>
-              <i className="fa-solid fa-gamepad"></i>
-            </div>
-            <div className="browse-container__category-container-cat-one hover:drop-shadow-2xl">
-              <h1>Catering</h1>
-              <i className="fa-solid fa-bowl-food"></i>
-            </div>
-            <div className="browse-container__category-container-cat-one hover:drop-shadow-2xl">
-              <h1>More services</h1>
-              <i className="fa-solid fa-gear"></i>
-            </div>
-          </div>
-        </div>
-
-        <div className="browse-container__cards"></div>
+        <TopCategory />
       </div>
     </>
   );

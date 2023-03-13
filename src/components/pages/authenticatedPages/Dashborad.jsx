@@ -7,7 +7,9 @@ import Navigation from "./Navigation";
 import Browse from "./Browse";
 import Category from "./Category";
 import OtherCategorySection from "./OtherCategorySection";
+import Posts from "./pages/Posts";
 import Footer from "./Footer";
+import LessRatedCompanies from "./LessRatedCompany";
 
 const Dashboard = () => {
   const { grantAccess } = React.useContext(AuthContext);
@@ -27,7 +29,9 @@ const Dashboard = () => {
       <Browse />
       <Category />
       <OtherCategorySection header="More offered services" />
-      {/* <Footer/> */}
+       <LessRatedCompanies />
+      <Posts />
+      <Footer/>
     </>
   );
 };

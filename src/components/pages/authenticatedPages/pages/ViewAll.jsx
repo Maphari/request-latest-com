@@ -1,29 +1,17 @@
 import React from "react";
-import { Link } from "react-router-dom";
-
-// COMPONENTS IMPORTS
-import CategoryCard from "./CategoryCard";
-//CONTEXT
-import { GetDataFromDBContext } from "../../contex/getDataFromDBContext";
+import { GetDataFromDBContext } from "../../../contex/getDataFromDBContext";
+import CategoryCard from "../CategoryCard";
 import { ScrollReveal } from "reveal-on-scroll-react";
+import TopCategory from "../TopCategory";
 
-export default function OtherCategorySection(props) {
-  const { header } = props;
+export default function ViewAll() {
   const { data } = React.useContext(GetDataFromDBContext);
   return (
     <>
-      <div className="otherCategorySection-container">
-        <div className="flex align-items-center justify-between my-[2rem]">
-          <h1 className="otherCategorySection-container__header">{header}</h1>
-          <Link to="/viewmore" className="font-medium view">
-            View all
-          </Link>
-        </div>
-      </div>
       <div className="category-container">
+        <TopCategory />
         {data.map((item) => (
           <CategoryCard
-            Id={item.id}
             key={item.id}
             header={item.shopName}
             src={item.imageUrl}
@@ -42,8 +30,6 @@ export default function OtherCategorySection(props) {
                 ? "gamepad"
                 : item.category === "photography"
                 ? "camera"
-                : item.category === "delivery"
-                ? "truck"
                 : null
             }
           />

@@ -1,4 +1,5 @@
 import React from "react";
+import { ScrollReveal } from "reveal-on-scroll-react";
 
 // IMAGES IMPORTS
 import groceryImage from "../assets/Online Groceries-pana.png";
@@ -8,16 +9,16 @@ const Different = () => {
   return (
     <>
       <div className="different-container">
-        <h1 className="different-container__header">
+        <ScrollReveal.h1 animation="fade-in" easing="easeInOut"  className="different-container__header">
           What makes <span className="color">Request</span> different
           <br /> to other platforms
-        </h1>
-        <p className="different-container__para">
+        </ScrollReveal.h1>
+        <ScrollReveal.p animation="fade-in" easing="easeInOut" className="different-container__para">
           we are here to give you better services, that will last forever.{" "}
-        </p>
+        </ScrollReveal.p>
       </div>
 
-      <div className="different-container__second">
+      <ScrollReveal.div animation="fade-in" easing="backInOut" className="different-container__second">
         <img
           src={groceryImage}
           alt="man holding groceries"
@@ -36,8 +37,8 @@ const Different = () => {
             Learn more
           </button>
         </div>
-      </div>
-      <div className="different-container__third">
+      </ScrollReveal.div>
+      <ScrollReveal.div animation="fade-in" easing="backInOut" className="different-container__third">
         <div className="different-container__third-div">
           <h1 className="different-container__third-div-head">
             Get your <span className="color">clothes</span> cleaned
@@ -56,7 +57,7 @@ const Different = () => {
           alt="man holding groceries"
           className="different-container__third-img"
         />
-      </div>
+      </ScrollReveal.div>
     </>
   );
 };

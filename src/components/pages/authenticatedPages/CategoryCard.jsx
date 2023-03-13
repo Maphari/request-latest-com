@@ -1,13 +1,40 @@
 import React from "react";
+import { db } from "../../../firebase/firebase-config";
+import { getDocs, collection, where, query } from "firebase/firestore";
 
 export default function CategoryCard(props) {
-  const { src, alt, header, isOpenOrClose, address, ratings, iconName } = props;
+  const {
+    src,
+    alt,
+    header,
+    isOpenOrClose,
+    address,
+    ratings,
+    iconName,
+    reaction,
+    Id,
+  } = props;
+  const [clickedId, setClickedId] = React.useState(null);
+
+  const handleClickedComponentById = async (id) => {
+    const collectionRef = collection(db, "request");
+    const filterRef = query(collectionRef, where("id", "==", id));
+    const snapshot = await getDocs(filterRef);
+    const docs = snapshot.docs.map((doc) => doc.data());
+    setClickedId(docs);
+    console.log(clickedId)
+  };
+
   return (
-    <div className="category-container__cat drop-shadow-2xl hover:cursor-pointer  hover:transform hover:scale-110">
+    <div
+      className="category-container__cat drop-shadow-2xl hover:cursor-pointer"
+      id={Id}
+      onClick={() => handleClickedComponentById(Id)}
+    >
       <div className="category-container__cat-image-container">
         <img src={src} alt={alt} className="category-container__cat-image" />
         <div className="drop-shadow-md">
-          <i className="fa-solid fa-heart"></i>
+          <i className={`fa-solid fa-${reaction}`}></i>
         </div>
       </div>
       <div className="category-container__cat-inner">
@@ -24,7 +51,6 @@ export default function CategoryCard(props) {
         <p>Company ratings</p>
         <div>{ratings}</div>
       </div>
-      <button>View company</button>
     </div>
   );
 }

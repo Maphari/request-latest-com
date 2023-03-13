@@ -14,6 +14,14 @@ import Message from "../components/pages/authenticatedPages/pages/Message";
 import Latest from "../components/pages/authenticatedPages/pages/Latest";
 import Settings from "./pages/authenticatedPages/pages/Settings";
 import Account from "./pages/authenticatedPages/pages/Account";
+import ViewAll from "./pages/authenticatedPages/pages/ViewAll";
+import GroceryStores from "./pages/authenticatedPages/pages/GroceryStores";
+import LaundryStore from "./pages/authenticatedPages/pages/LaundryStore";
+import GamersStore from "./pages/authenticatedPages/pages/GamersStore";
+import PhotographyStore from "./pages/authenticatedPages/pages/PhotographyStore";
+import CateringStore from "./pages/authenticatedPages/pages/CateringStore";
+import DeliveryStore from "./pages/authenticatedPages/pages/DeliveryStore";
+import CompanyProfile from "./pages/authenticatedPages/pages/CompanyProfile";
 
 const UnAuthorizedUserRoutes = () => {
   return (
@@ -34,6 +42,14 @@ const AuthorizedUserRoutes = () => {
       <Route path="/latest" element={<Latest />} />
       <Route path="/settings" element={<Settings />} />
       <Route path="/account" element={<Account />} />
+      <Route path="/viewmore" element={<ViewAll />} />
+      <Route path="/grocery" element={<GroceryStores />} />
+      <Route path="/laundry" element={<LaundryStore />} />
+      <Route path="/gamers" element={<GamersStore />} />
+      <Route path="/catering" element={<CateringStore />} />
+      <Route path="/photography" element={<PhotographyStore />} />
+      <Route path="/delivery" element={<DeliveryStore />} />
+      <Route path="/profile" element={<CompanyProfile />} />
     </Routes>
   );
 };

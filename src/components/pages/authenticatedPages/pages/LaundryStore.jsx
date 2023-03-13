@@ -1,14 +1,11 @@
 import React from "react";
-import { ScrollReveal } from "reveal-on-scroll-react";
-//COMPONENTS IMPORTS
-import CategoryCard from "./CategoryCard";
-// DB
+import TopCategory from "../TopCategory";
 import { collection, getDocs, where, query } from "firebase/firestore";
-import { db } from "../../../firebase/firebase-config";
-// SWIPER SLIDER
-import { Link } from "react-router-dom";
+import { db } from "../../../../firebase/firebase-config";
+import { ScrollReveal } from "reveal-on-scroll-react";
+import CategoryCard from "../CategoryCard";
 
-export default function Category() {
+export default function LaundryStore() {
   const [data, setData] = React.useState([]);
   const [loading, setLoading] = React.useState(true);
 
@@ -17,7 +14,7 @@ export default function Category() {
       const collectionReference = collection(db, "request");
       const filteredDocs = query(
         collectionReference,
-        where("rating", ">=", 4.6)
+        where("category", "==", "laundry")
       );
       const snapShot = await getDocs(filteredDocs);
       const docs = snapShot.docs.map((doc) => doc.data());
@@ -26,9 +23,6 @@ export default function Category() {
     };
     getDataFromDB();
   }, []);
-  const handleButtonToProfile = () => {
-    console.log(data.map((item, index) => item.id));
-  };
 
   if (loading) {
     return (
@@ -39,24 +33,14 @@ export default function Category() {
   }
   return (
     <>
-      <div className="otherCategorySection-container">
-        <div className="flex align-items-center justify-between my-[2rem]">
-          <h1 className="otherCategorySection-container__header">
-            Most rated companies {data[0].rating}
-          </h1>
-          <Link to="/viewmore" className="font-medium view">
-            View all
-          </Link>
-        </div>
-      </div>
-      <div
+      <ScrollReveal.div
         animation="fade-in"
         easing="easeIn"
         className="category-container"
       >
+        <TopCategory />
         {data.map((item) => (
           <CategoryCard
-            Id={item.id}
             key={item.id}
             header={item.shopName}
             src={item.imageUrl}
@@ -75,8 +59,6 @@ export default function Category() {
                 ? "gamepad"
                 : item.category === "photography"
                 ? "camera"
-                : item.category === "delivery"
-                ? "truck"
                 : null
             }
           />
@@ -88,7 +70,7 @@ export default function Category() {
         >
           <i className="fa-solid fa-plus font-2xl"></i>
         </ScrollReveal.div>
-      </div>
+      </ScrollReveal.div>
     </>
   );
 }

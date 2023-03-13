@@ -8,7 +8,7 @@ import { db } from "../../../firebase/firebase-config";
 // SWIPER SLIDER
 import { Link } from "react-router-dom";
 
-export default function Category() {
+export default function LessRatedCompanies() {
   const [data, setData] = React.useState([]);
   const [loading, setLoading] = React.useState(true);
 
@@ -17,7 +17,7 @@ export default function Category() {
       const collectionReference = collection(db, "request");
       const filteredDocs = query(
         collectionReference,
-        where("rating", ">=", 4.6)
+        where("rating", "<=", 4)
       );
       const snapShot = await getDocs(filteredDocs);
       const docs = snapShot.docs.map((doc) => doc.data());
@@ -26,9 +26,6 @@ export default function Category() {
     };
     getDataFromDB();
   }, []);
-  const handleButtonToProfile = () => {
-    console.log(data.map((item, index) => item.id));
-  };
 
   if (loading) {
     return (
@@ -42,18 +39,14 @@ export default function Category() {
       <div className="otherCategorySection-container">
         <div className="flex align-items-center justify-between my-[2rem]">
           <h1 className="otherCategorySection-container__header">
-            Most rated companies {data[0].rating}
+            Less rated companies
           </h1>
           <Link to="/viewmore" className="font-medium view">
             View all
           </Link>
         </div>
       </div>
-      <div
-        animation="fade-in"
-        easing="easeIn"
-        className="category-container"
-      >
+      <div animation="fade-in" easing="easeIn" className="category-container">
         {data.map((item) => (
           <CategoryCard
             Id={item.id}
