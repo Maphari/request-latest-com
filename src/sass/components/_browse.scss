@@ -1,0 +1,101 @@
+.browse-container {
+    padding: 3rem;
+  
+    &__subnav {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      justify-content: space-between;
+      position: sticky;
+      form {
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+      }
+      .form {
+        border: 1px solid $GRAY-COLOR;
+        border-radius: 50px;
+  
+        input {
+          outline: none;
+          padding: 1rem;
+          // color: $WHITE-COLOR;
+          border-radius: 50px;
+          width: 27rem;
+        }
+        i {
+          padding-left: 1.3rem;
+        }
+      }
+  
+      &__header {
+        font-size: 2.3rem;
+        font-weight: 600;
+      }
+      &__location {
+        background-color: #eeeeee;
+        padding: 1rem;
+        border-radius: 50px;
+        //   color: $WHITE-COLOR;
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+  
+        i {
+          font-size: 1.1rem;
+          color: $GRAY-COLOR;
+        }
+      }
+    }
+    &__category-container {
+      margin: 3rem 0 0;
+  
+      &-header {
+        font-size: 1.4rem;
+        font-weight: 500;
+      }
+  
+      &-cat {
+        display: flex;
+        align-items: center;
+        flex-wrap: wrap;
+        gap: 1.8rem;
+  
+        &-one {
+          margin: 2rem 0;
+          padding: 1.2rem 1rem;
+          background-color: #eeeeee;
+          border-radius: 40px;
+          border: 1px solid #eeeeee;
+          transition: all 700ms ease-in-out;
+  
+          display: flex;
+          align-items: center;
+          gap: 0.7rem;
+  
+          h1 {
+            font-weight: 500;
+          }
+  
+          i {
+            font-size: 1.3rem;
+            color: $GRAY-COLOR;
+          }
+  
+          &:hover {
+            border: 1px solid $GRAY-COLOR;
+            cursor: pointer;
+            background-color: darken(#e4e4e4, 5);
+            transform: scale(1.1);
+          }
+        }
+      }
+    }
+  }
+  
+  .active-option {
+    background-color: $WHITE-COLOR;
+    border-radius: 50px;
+    color: $PRIMARY-COLOR;
+  }
+  

@@ -4,7 +4,10 @@ import { AuthContext } from "../../contex/authContext";
 
 //COMPONENTS IMPORTS
 import Navigation from "./Navigation";
-import Browse from "./pages/Browse";
+import Browse from "./Browse";
+import Category from "./Category";
+import OtherCategorySection from "./OtherCategorySection";
+import Footer from "./Footer";
 
 const Dashboard = () => {
   const { grantAccess } = React.useContext(AuthContext);
@@ -22,6 +25,9 @@ const Dashboard = () => {
     <>
       <Navigation />
       <Browse />
+      <Category />
+      <OtherCategorySection header="More offered services" />
+      {/* <Footer/> */}
     </>
   );
 };

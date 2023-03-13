@@ -12,7 +12,6 @@ import Dashboard from "./pages/authenticatedPages/Dashborad";
 // PAGES AUTHENTICATED
 import Message from "../components/pages/authenticatedPages/pages/Message";
 import Latest from "../components/pages/authenticatedPages/pages/Latest";
-import Notification from "../components/pages/authenticatedPages/pages/Notification";
 import Settings from "./pages/authenticatedPages/pages/Settings";
 import Account from "./pages/authenticatedPages/pages/Account";
 
@@ -33,7 +32,6 @@ const AuthorizedUserRoutes = () => {
       <Route path="/" element={<Dashboard />} />
       <Route path="/message" element={<Message />} />
       <Route path="/latest" element={<Latest />} />
-      <Route path="/notification" element={<Notification />} />
       <Route path="/settings" element={<Settings />} />
       <Route path="/account" element={<Account />} />
     </Routes>

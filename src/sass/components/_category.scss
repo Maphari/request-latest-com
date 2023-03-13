@@ -1,25 +1,79 @@
 .category-container {
-  padding: 1rem 3rem;
+  padding: 0 3rem 1rem;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 1rem;
 
   &__cat {
-    display: flex;
-    align-items: center;
-    gap: 2rem;
+    background-color: #fff;
+    padding: 0.5rem;
+    transition: all 700ms ease-in-out;
+    &-image-container {
+      position: relative;
 
-    &1 {
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      gap: 0.5rem;
-      font-weight: 500;
-      i {
-        border-radius: 100%;
-        $SIZE: 55px;
-        height: $SIZE;
+      div {
+        $SIZE: 30px;
         width: $SIZE;
-        text-align: center;
-        background-image: $BACKGROUND-IMAGE-PRIMARY;
+        height: $SIZE;
+        border-radius: 100px;
+        position: absolute;
+        top: 10px;
+        right: 10px;
+
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        i {
+          font-size: 1.4rem;
+          color: red;
+        }
+      }
+    }
+    &-image {
+      width: 250px;
+      height: 160px;
+    }
+    &-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin: 0.8rem 0 0.5rem;
+
+      &-header {
+        font-weight: 500;
+        font-size: 1.1rem;
+      }
+    }
+    &-para {
+      margin: 0.4rem 0;
+      font-size: 0.9rem;
+    }
+    &-rating {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      font-size: 0.9rem;
+
+      div {
+        background-color: #eeeeee;
+        border-radius: 100px;
+        padding: 0.3rem;
+        font-weight: 500;
+      }
+    }
+    button {
+      background: $BACKGROUND-IMAGE-PRIMARY;
+      color: $WHITE-COLOR;
+      width: 100%;
+      padding: 0.6rem;
+      margin: 1rem 0 0.3rem;
+
+      &:hover {
+        background: lighten($PRIMARY-COLOR, 10);
       }
     }
   }

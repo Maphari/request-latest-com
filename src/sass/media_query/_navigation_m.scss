@@ -44,3 +44,41 @@
     padding: 2rem 1.5rem;
   }
 }
+
+// NAVIGATION MEDIA QUERY FOR AUTHOEIZED USERS
+@media screen and (min-width: 93.75rem) {
+  .container-dashboard {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    .wrapper {
+      max-width: 90rem;
+      width: 100%;
+    }
+  }
+}
+
+@media screen and (max-width: 56.25rem) {
+  .container-dashboard__links,
+  .container-dashboard__linkss {
+    display: none !important;
+  }
+  .icon-menu {
+    font-size: 1.8rem;
+
+    &:hover {
+      cursor: pointer;
+    }
+  }
+}
+@media screen and (min-width: 56.25rem) {
+  .icon-menu,
+  .menu-small {
+    display: none !important;
+  }
+}
+@media screen and (max-width: 56.25rem) {
+  .container-dashboard {
+    padding: 1.6rem !important;
+  }
+}

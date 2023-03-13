@@ -1,7 +1,11 @@
 .container-dashboard {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
+  position: relative;
+
+  .wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
 
   background-image: $BACKGROUND-IMAGE-PRIMARY;
   color: $WHITE-COLOR;
@@ -43,7 +47,39 @@
 }
 
 .active {
- background-color: #051937;
+  background-color: #051937;
   border-radius: 2px;
   opacity: 1 !important;
+}
+
+.menu-small {
+  position: absolute;
+  z-index: 10;
+
+  background-image: $BACKGROUND-IMAGE-PRIMARY;
+  width: 100%;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  color: $WHITE-COLOR;
+  height: 85%;
+
+  transition: all 700ms ease-in-out;
+
+  ul {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    gap: 1.3rem;
+    width: 100%;
+
+    a {
+      padding: 0.6rem;
+      font-size: 1.1rem;
+      width: 100%;
+    }
+  }
 }
